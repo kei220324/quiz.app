@@ -11,9 +11,10 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function top()
     {
-        //
+        $category=Category::all();
+        return view('admin.top')->with('categories',$category);
     }
 
     /**
@@ -29,11 +30,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+
         $category=new Category();
-        $category->name=$request->name;
-        $category->description=$request->description;
+        $category->name=$request->input('name');
+        $category->description=$request->input('description');
         $category->save();
-        return  redirect()->route('admin.top');
+        return redirect()->route('admin.top')->with('success','カテゴリーを登録しました');
+
 }
 
     /**

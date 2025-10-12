@@ -18,24 +18,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-
-//管理画面トップページ
 // 管理画面
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('top', function() {
-        return view('admin.top');
-    })->name('top');
+    // 管理画面トップページ兼カテゴリートップページ
+    Route::get('top', [CategoryController::class, 'top'])->name('top');
 
     // カテゴリー管理
     Route::prefix('categories')->name('categories.')->group(function () {
-        Route::get('create',[CategoryController::class,'create'])->name('create');
-        //かげゴリー新規登録処理
-        Route::post('store',[CategoryController::class,'store'])->name('store');
+        Route::get('create', [CategoryController::class, 'create'])->name('create');
+        // カテゴリー新規登録処理
+        Route::post('/store', [CategoryController::class, 'store'])->name('store');
     });
 });
-
-
-
-
