@@ -49,9 +49,11 @@ class CategoryController extends Controller
     /**
      * カテゴリー編集画面表示
      */
-    public function edit(Category $category)
+    public function edit(Request $request, int $categoryId)
     {
-        //
+    $category=Category::findOrFail($categoryId);
+    return view('admin.categories.edit') ->with('category',$category);
+
     }
 
     /**
