@@ -61,6 +61,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request,int $categoryId)
     {
+
         $category=Category::findOrFail($categoryId);
         $category->name=$request->input('name');
         $category->description=$request->input('description');
@@ -72,8 +73,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request, int $categoryId)
     {
-        //
+        $category=Category::findOrFail($categoryId);
+        $category->delete();
+        return redirect()->route('admin.top')->with('success','カテゴリーを削除しました');
+
     }
 }
