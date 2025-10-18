@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\QuizController ;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +39,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('{categoryId}/update', [CategoryController::class, 'update'])->name('update');
         // カテゴリー削除機能
         Route::post('{categoryId}/destroy', [CategoryController::class, 'destroy'])->name('destroy');
+
+         Route::prefix('{categoryId}quizzes')->name('quizzes.')->group(function (){
+               //クイズ新規登録画面
+                Route::get('create',[QuizController ::class,'create'])->name('create');
+         });
 
     });
 

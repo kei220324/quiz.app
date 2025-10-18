@@ -27,7 +27,7 @@
           <div class="p-2 w-full">
             {{-- ボタン --}}
             <button
-              onclick="location.href='{{ route('admin.categories.create') }}'"
+              onclick="location.href='{{ route('admin.categories.quizzes.create',['categoryId'=>$category->id]) }}'"
               class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8
                      focus:outline-none hover:bg-blue-600 rounded text-lg"
             >
